@@ -106,6 +106,8 @@ server {
     # Everything else under /assets keeps a stable URL across image upgrades
     location /assets {
         add_header Cache-Control "public, max-age=3600, must-revalidate";
+        # The TV app runs from another origin and reads EmulatorJS from here.
+        add_header Access-Control-Allow-Origin *;
         gzip_static on;
         try_files $uri $uri/ =404;
     }
